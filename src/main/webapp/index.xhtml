@@ -1,12 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <!-- La balise <f:view> sert à délimiter le code que le moteur JSF doit traiter, celui où apparaîssent les balises <f:xx>.
+L'attribut locale permet de préciser une langue d'affichage pour la page. Ici, nous en utiliserons deux, l'anglais et le
+français. La valeur de l'attribut locale est exprimée sous la forme d'une expression EL (Expression Language)
+[#{expression}]. La forme de expression peut être diverse. Nous l'exprimerons le plus souvent sous la forme bean['clé']
+ou bean.champ. Dans nos exemples, bean sera soit une classe Java soit un fichier de messages. Avec JSF 1, ces beans
+devaient être déclarés dans le fichier [faces-config.xml]. Avec JSF 2, ce n'est plus obligatoire pour les classes Java. On peut
+désormais utiliser des annotations qui font d'une classe Java, un bean connu de JSF 2. Le fichier des messages doit lui être
+déclaré dans le fichier de configuration [faces-config.xml].
 
+    IMPORTANT : la localisation de l'application est utilisée par la balise <f:view>.
+    Pour passer la page en Français, il suffit que l'attribut locale ait la valeur fr.
+    Pour la passer en anglais, il faut lui donner la valeur en. -->
+    <f:view locale="#{changeLocale.locale}">
+        <head>
+            <!-- Le bean msg doit être déclaré dans le fichier de configuration [faces-config.xml]. -->
+            <title><h:outputText value="#{msg['welcome.titre']}" /></title>
+        </head>
+        <body>
+            <!-- Le formulaire dispose de trois liens déclenchant son traitement. -->
+            <h:form id="formulaire">
+                <!-- La balise <h:panelGrid> donne naissance à la balise HTML <table> -->
+                <h:panelGrid columns="2">
+                    <!-- action : soit une chaîne de caractères C, soit la référence d'une méthode qui après exécution rend la chaîne de
+                        caractères C. Cette chaîne de caractères C peut être :
+                        • soit le nom d'une page JSF du projet,
+                        • soit un nom défini dans les règles de navigation du fichier [faces-config.xml] et associé à une page JSF
+                        du projet ;
+                        Dans les deux cas, la page JSF est affichée, une fois que l'action définie par l'attribut action a été exécutée.
+
+                    L'attribut action définit ici le gestionnaire d'évènements. Voir la méthode [ChangeLocale.setFrenchLocale] -->
+                    <h:commandLink value="#{msg['welcome.langue1']}" action="#{changeLocale.setFrenchLocale}"/>
+                    <h:commandLink value="#{msg['welcome.langue2']}" action="#{changeLocale.setEnglishLocale}"/>
+                </h:panelGrid>
+                <h1><h:outputText value="#{msg['welcome.titre']}" /></h1>
+                <h:commandLink value="#{msg['welcome.page1']}" action="page1"/>
+            </h:form>
+        </body>
+    </f:view>
+</html>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+
+    <application>
+        <!-- Le nom du fichier des messages est défini. Il sera cherché dans le Classpath du projet. S'il est à l'intérieur d'un paquetage,
+        celui-ci doit être défini, par exemple ressources.messages, si le fichier [messages.properties] se trouve dans le dossier
+        [ressources] du Classpath. Le nom ne comportant pas de paquetage, le fichier [messages.properties] doit être placé à la
+        racine du dossier [src / main / resources]. -->
+        <resource-bundle>
+            <!-- Le fichier s'appellera messages[_CodeLangue][_CodePays].properties (implicite). -->
+            <base-name>
+                messages
+            </base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
+</faces-config>
